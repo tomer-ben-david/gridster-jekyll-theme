@@ -2,7 +2,8 @@
 layout: post-full
 title:  "Scalability and performance cheatsheet"
 date:   2017-05-30 22:18:00
-categories: scalability
+categories: scalabilit
+featimg: gallery-2.jpg
 comments: true
 --- 
 * **Boxing and unboxing** cost might be high especially when in a loop (can create many heap allocations).
