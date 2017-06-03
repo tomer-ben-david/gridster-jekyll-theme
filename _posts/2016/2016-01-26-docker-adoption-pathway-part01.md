@@ -1,0 +1,28 @@
+---
+layout: post
+title:  "Containers adoption pathway - Part 1"
+date:   2016-01-26 22:18:00
+categories: software-development,architecture,design
+comments: true
+published: false
+---
+# Containers adoption pathway - Part 1
+
+Considering `docker` adoption in your organization? There are many aspects to consider.  As we are going through this evaluation process in LivePerson, we thought it would be beneficial if we share some of our insights on this process.  Any way you look at such an infrastructure change it has a huge impact on developers, CI, CD, configuration, monitoring, packaging, security and almost any aspect of software development and delivery.  You should be going through a path of inspecting each step finding your best practices, forming the skeleton's to be used in projects.  The challenge of integrating it to existing services with already existing deployment tools is not something to disparage about, moreover, if you already have existing services it's a process you would need to go through as well.  So, if you are are before that process, or midst of it I hope you could find our insights to that process helpful.  Let's dig in:
+
+**Review the reasons you adopt `docker`**, or better, in it's generalized form - for adopting `containerized` packaging and deployment methodology.  It's always best to start by getting the motivation right.  Assuming you already use a configuration tool for your deployments, and already very happy with it, you should ask yourself, why should I replace my current methodology with a containerized based deployments? A good answer would be that you are a developer who appreciates with caution the concept of `immutability` and `functional-programming`;  In this case `containers` allows you to deploy these concepts into your deployments.  Having `containerized` deployments allows you to have `immutable deployments` in a much easier and fun way.  By having your containers `read-only` you may even come closer to the concept of `pure deployments` where you do no modifications but only replacements.  
+
+<img src="https://docs.google.com/drawings/d/1N3GAfDL6AvkGQXYvrT1_f_C3vxfu2pUpx2AJwb4Fo24/pub?w=893&amp;h=324">
+
+Another good answer is that adopting containerized based deployments would bring you closer to `continuous-deployment` methodology implementation.  In the excellent book [`Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation`](http://continuousdelivery.com/) which has been written before the `containers` rise, many of the components which the author describes as essentials to a successful `continuous deployment` are found to exist in container based deployments, among them: *automating all facets of building, deployment pipeline, collaboration between developers testers and operations, managing infrastructure, dependencies, auditing*.  Many of the above are found to either be part of `docker` infrastructure or peripheral projects or side effects of using it. 
+
+A mostly bad answer would be because you think it's going to improve the performance of a certain server, a container would just "wrap" your process if it's imperformant its going to continue being imperformant, only to the rare occasion where the imperformancy is due to having many VM's consuming much of the physical machine memory in that case more lightweight processes would do better resources sharing and reduce resources utilization.  
+
+**Are you ready for immutable deployments?** In the previous item we dealt with the motivation to adopt containerized based deployments.  Lets check how ready you are.  Questions to ask to asses readiness: do you install your apps from scratch, is that already happening in production? If not - are you at least already deploying your apps into `VM's`, or, even better to `cloud-vm's`?  Do deployment/production team add new instances of your app without contacting the relevant developers team as if they do not exist? If I restart your apps now will all behave as usual (the usual without problems)?  If you answered yes to at least some of the above, then, the effort of moving into containerized deployments is achievable with much less frustration.  If not, you should first review your deployments, update them, or be ready for much more work when using container based deployments.  (Note, if you plan to mutate your environments with containerized based deployments you are heading the wrong way).
+
+<img src="https://docs.google.com/drawings/d/1gM8IxePbH-UpIcRegn8_Fsj2kzw5qTHLKvYRhKY8u60/pub?w=554&amp;h=323">
+
+
+**What are your plans for current deployment tools** In most cases you already use deployment tools such as `puppet`, `rpm` and the like.  On one hand using these tools is great, because this means your deployments are very close to fully automated (or already fully automated).  On the other hand this means you have a choice to make.  Either dump them and use a single container package builder (`Dockerfile`) or else continue using your `rpm` scripts together with `docker` scripts, and same for `puppet` scripts.  Personally I would recommend you to try and get things simple on this matter, if you can have a single scripting language, go for it, if you already have too much infrastructure around `rpm` consider keeping it.  Note that if you continue having the bulk of packaging in `rpm` this would mean you should aspire to being able to install your packages even without `docker`.  As for `puppet` you should highly consider replacing it all together by `docker` scripting and its peripheral scripts (`kubernetes`)
+
+<img src="https://docs.google.com/drawings/d/1Tfe2a9z_AFwHv0oZuxbVJg7KhA2-UYHdHR6hA94LiO0/pub?w=570&amp;h=286">
