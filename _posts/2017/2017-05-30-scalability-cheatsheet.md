@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-full
 title:  "Scalability and performance cheatsheet"
 date:   2017-05-30 22:18:00
 categories: scalability
