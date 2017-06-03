@@ -1,5 +1,5 @@
 ---
-layout: post-full
+layout: post-material-sidebar-left
 title:  "Scalability and performance cheatsheet"
 date:   2017-05-30 22:18:00
 categories: scalabilit
