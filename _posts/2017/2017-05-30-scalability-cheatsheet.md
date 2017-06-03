@@ -2,7 +2,7 @@
 layout: post-material-sidebar-left
 title:  "Scalability and performance cheatsheet"
 date:   2017-05-30 22:18:00
-categories: scalabilit
+tags: scala
 featimg: gallery-2.jpg
 comments: true
 --- 
